@@ -5,19 +5,20 @@ Fold. Fly. Experiment. — a paper airplane tutorial and exploration site.
 ## Stack
 
 - Next.js 16 (App Router) + TypeScript + Tailwind CSS 4
-- Static-first content with local JSON/TS plane data
-- Deployed to Cloudflare Workers via OpenNext
+- Static export (`output: "export"`)
+- Cloudflare Pages
 
 ## Scripts
 
 ```bash
 npm run dev      # local development
-npm run build    # Next.js production build
-npm run deploy   # OpenNext build + Cloudflare Workers deploy
+npm run build    # static export to ./out
+npm run deploy   # build + deploy to Cloudflare Pages
 ```
 
-## Live
+## Links
 
-- Production: https://paper-airplane-lab.algoinf.workers.dev
+- Site: https://paper-airplane-lab.pages.dev
+- GitHub: https://github.com/algoinfo/paper-airplane-lab
 
 Set `NEXT_PUBLIC_SITE_URL` when using a custom domain.

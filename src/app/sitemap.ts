@@ -4,6 +4,8 @@ import { airplanes } from "@/data/planes/airplanes";
 import { scienceArticles } from "@/data/science/articles";
 import { siteConfig } from "@/lib/site";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
