@@ -1,15 +1,37 @@
 import Link from "next/link";
 import { PlaneCard } from "@/components/planes/PlaneCard";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { FaqList } from "@/components/ui/FaqList";
 import type { CategoryPage } from "@/data/categories";
 import { getPlanesForCategory } from "@/data/categories";
+import { absoluteUrl } from "@/lib/seo";
 
 export function CategoryPageView({ category }: { category: CategoryPage }) {
   const planes = getPlanesForCategory(category);
 
   return (
     <div className="container-page section-space">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: category.h1,
+          description: category.metaDescription,
+          url: absoluteUrl(category.path),
+          inLanguage: "en",
+          mainEntity: {
+            "@type": "ItemList",
+            numberOfItems: planes.length,
+            itemListElement: planes.map((plane, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name: plane.name,
+              url: absoluteUrl(`/paper-airplanes/${plane.slug}`),
+            })),
+          },
+        }}
+      />
       <Breadcrumbs
         items={[
           { name: "Home", href: "/" },

@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { Difficulty, FlightType, PaperAirplane } from "@/data/planes/types";
 import { DIFFICULTY_ORDER } from "@/data/planes/types";
 import { PlaneCard } from "./PlaneCard";
@@ -19,11 +19,27 @@ const flightTypes: Array<FlightType | "All"> = [
 type SortKey = "name" | "difficulty";
 
 export function PlaneExplorer({ planes }: { planes: PaperAirplane[] }) {
+  const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
   const [difficulty, setDifficulty] = useState<Difficulty | "All">("All");
   const [flightType, setFlightType] = useState<FlightType | "All">("All");
   const [sortBy, setSortBy] = useState<SortKey>("name");
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      const trimmed = query.trim();
+      const current = searchParams.get("q") ?? "";
+      if (trimmed === current) return;
+      const params = new URLSearchParams(searchParams.toString());
+      if (trimmed) params.set("q", trimmed);
+      else params.delete("q");
+      const next = params.toString();
+      router.replace(next ? `${pathname}?${next}` : pathname, { scroll: false });
+    }, 300);
+    return () => window.clearTimeout(timer);
+  }, [query, pathname, router, searchParams]);
 
   const filtered = useMemo(() => {
     const normalized = query.trim().toLowerCase();

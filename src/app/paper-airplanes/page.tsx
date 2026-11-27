@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { PlaneExplorer } from "@/components/planes/PlaneExplorer";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { airplanes } from "@/data/planes/airplanes";
-import { createMetadata } from "@/lib/seo";
+import { absoluteUrl, createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
   title: "Paper Airplane Designs – Explore & Filter",
@@ -23,6 +24,27 @@ function ExplorerFallback() {
 export default function PaperAirplanesPage() {
   return (
     <div className="container-page section-space">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Paper Airplane Designs",
+          description:
+            "Browse paper airplane designs with search and filters for difficulty and flight type.",
+          url: absoluteUrl("/paper-airplanes"),
+          inLanguage: "en",
+          mainEntity: {
+            "@type": "ItemList",
+            numberOfItems: airplanes.length,
+            itemListElement: airplanes.map((plane, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name: plane.name,
+              url: absoluteUrl(`/paper-airplanes/${plane.slug}`),
+            })),
+          },
+        }}
+      />
       <Breadcrumbs
         items={[
           { name: "Home", href: "/" },

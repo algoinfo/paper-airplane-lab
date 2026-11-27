@@ -2,6 +2,8 @@ export interface ScienceArticle {
   slug: string;
   title: string;
   description: string;
+  publishedAt: string;
+  updatedAt: string;
   readingTime: string;
   summary: string;
   sections: Array<{ heading: string; body: string[] }>;
@@ -15,6 +17,8 @@ export const scienceArticles: ScienceArticle[] = [
     title: "How Do Paper Airplanes Fly?",
     description:
       "A clear overview of the forces that keep a paper airplane in the air — and why most flights end in a landing.",
+    publishedAt: "2025-08-12",
+    updatedAt: "2026-03-01",
     readingTime: "6 min",
     summary:
       "Paper airplanes fly because moving air creates lift on the wings while thrust from your throw fights drag and gravity. Understanding those four ideas makes trimming much easier.",
@@ -49,6 +53,8 @@ export const scienceArticles: ScienceArticle[] = [
     title: "What Is Lift?",
     description:
       "Learn what lift means for paper wings, without overclaiming textbook myths.",
+    publishedAt: "2025-08-19",
+    updatedAt: "2026-03-01",
     readingTime: "5 min",
     summary:
       "Lift is the upward aerodynamic force produced as air moves over and under a wing. For paper planes, wing area, angle of attack, and airspeed decide how much lift you get.",
@@ -81,6 +87,8 @@ export const scienceArticles: ScienceArticle[] = [
     title: "How Does Gravity Affect Paper Airplanes?",
     description:
       "Gravity never turns off — here is how nose weight and balance change what you see in flight.",
+    publishedAt: "2025-08-26",
+    updatedAt: "2026-03-01",
     readingTime: "5 min",
     summary:
       "Gravity pulls on every part of the plane. Where the mass sits (especially near the nose) changes whether the plane dives, stalls, or glides smoothly.",
@@ -107,6 +115,8 @@ export const scienceArticles: ScienceArticle[] = [
     title: "How to Balance a Paper Airplane",
     description:
       "Simple checks for nose weight, wing symmetry, and elevator trim.",
+    publishedAt: "2025-09-02",
+    updatedAt: "2026-03-01",
     readingTime: "6 min",
     summary:
       "Balance means matching nose weight, wing size, and trailing-edge trim so the plane holds a useful path after release.",
@@ -142,6 +152,8 @@ export const scienceArticles: ScienceArticle[] = [
     title: "How Wing Shape Changes Flight",
     description:
       "Compare dart wings and glider wings and what each shape is good for.",
+    publishedAt: "2025-09-09",
+    updatedAt: "2026-03-01",
     readingTime: "5 min",
     summary:
       "Narrow dart wings favor speed and penetration. Wide glider wings favor lift at low speed. Hybrid shapes sit in between.",
@@ -173,6 +185,8 @@ export const scienceArticles: ScienceArticle[] = [
     title: "Why Do Paper Airplanes Turn?",
     description:
       "Turns usually come from asymmetric wings, bent rudders, or uneven elevators — here is how to diagnose them.",
+    publishedAt: "2025-09-16",
+    updatedAt: "2026-03-01",
     readingTime: "5 min",
     summary:
       "Most unwanted turns are manufacturing issues: one wing larger, one elevator higher, or a warped fuselage. Intentional turns are how stunt planes work.",

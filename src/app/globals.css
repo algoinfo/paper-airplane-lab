@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 :root {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Source Sans 3", "Segoe UI", sans-serif;
   --background: #f7f5f0;
   --foreground: #2a2e35;
   --surface: #fffcf7;

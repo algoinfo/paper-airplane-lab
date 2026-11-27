@@ -30,6 +30,8 @@ export async function generateMetadata({
     description: article.description,
     path: `/paper-airplane-science/${article.slug}`,
     type: "article",
+    publishedTime: `${article.publishedAt}T08:00:00.000Z`,
+    modifiedTime: `${article.updatedAt}T08:00:00.000Z`,
   });
 }
 
@@ -58,8 +60,17 @@ export default async function ScienceArticlePage({
           "@type": "Article",
           headline: article.title,
           description: article.description,
+          image: [siteConfig.socialImage.url],
+          datePublished: `${article.publishedAt}T08:00:00.000Z`,
+          dateModified: `${article.updatedAt}T08:00:00.000Z`,
+          inLanguage: "en",
           author: { "@type": "Organization", name: siteConfig.name },
-          publisher: { "@type": "Organization", name: siteConfig.name },
+          publisher: {
+            "@type": "Organization",
+            "@id": `${siteConfig.url}/#organization`,
+            name: siteConfig.name,
+            url: siteConfig.url,
+          },
           mainEntityOfPage: absoluteUrl(
             `/paper-airplane-science/${article.slug}`,
           ),

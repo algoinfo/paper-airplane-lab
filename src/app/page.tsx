@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PlaneCard } from "@/components/planes/PlaneCard";
@@ -7,6 +8,14 @@ import { homeFaqs } from "@/data/home-faq";
 import { scienceArticles } from "@/data/science/articles";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { siteConfig } from "@/lib/site";
+import { createMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createMetadata({
+  title: "How to Make Paper Airplanes – Step-by-Step Folding Guides",
+  description:
+    "Learn how to fold paper airplanes with illustrated guides for distance, long flight time, easy designs, gliders, and stunts. Free step-by-step instructions for kids and beginners.",
+  path: "/",
+});
 
 const categories = [
   {
@@ -70,15 +79,31 @@ export default function HomePage() {
       <JsonLd
         data={{
           "@context": "https://schema.org",
-          "@type": "WebSite",
-          name: siteConfig.name,
-          url: siteConfig.url,
-          description: siteConfig.description,
-          potentialAction: {
-            "@type": "SearchAction",
-            target: `${siteConfig.url}/paper-airplanes?q={search_term_string}`,
-            "query-input": "required name=search_term_string",
-          },
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": `${siteConfig.url}/#organization`,
+              name: siteConfig.name,
+              url: siteConfig.url,
+            },
+            {
+              "@type": "WebSite",
+              "@id": `${siteConfig.url}/#website`,
+              name: siteConfig.name,
+              url: siteConfig.url,
+              description: siteConfig.description,
+              publisher: { "@id": `${siteConfig.url}/#organization` },
+              inLanguage: "en",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate: `${siteConfig.url}/paper-airplanes?q={search_term_string}`,
+                },
+                "query-input": "required name=search_term_string",
+              },
+            },
+          ],
         }}
       />
 
@@ -120,7 +145,7 @@ export default function HomePage() {
           </div>
           <div className="animate-float relative overflow-hidden rounded-[28px] border border-[var(--border)] shadow-[var(--shadow)]">
             <Image
-              src="/images/hero/hero-paper-airplane.jpg"
+              src="/images/hero/hero-paper-airplane.svg"
               alt="A white paper airplane flying through soft indoor light"
               width={1200}
               height={675}

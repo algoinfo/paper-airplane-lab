@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
-    "pages:build": "next build",
-    "deploy": "next build && wrangler pages deploy out --project-name=paper-airplane-lab --commit-dirty=true",
+    "pages:build": "next build --webpack",
+    "deploy": "next build --webpack && wrangler pages deploy out --project-name=paper-airplane-lab --commit-dirty=true",
     "preview": "next build && wrangler pages dev out"
   },
   "dependencies": {

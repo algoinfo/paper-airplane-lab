@@ -5,12 +5,14 @@ import { FoldingGuide } from "@/components/planes/FoldingGuide";
 import { PlaneCard } from "@/components/planes/PlaneCard";
 import { FoldDiagram } from "@/components/planes/FoldDiagram";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { FaqList } from "@/components/ui/FaqList";
 import {
   airplanes,
   getAirplaneBySlug,
   getRelatedAirplanes,
 } from "@/data/planes/airplanes";
+import { siteConfig } from "@/lib/site";
 import { createMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -47,6 +49,28 @@ export default async function PlaneDetailPage({
 
   return (
     <div className="container-page section-space">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          name: `How to Fold the ${plane.name} Paper Airplane`,
+          description: plane.description,
+          image: siteConfig.socialImage.url,
+          totalTime: `PT${Number.parseInt(plane.estimatedTime, 10)}M`,
+          supply: [
+            {
+              "@type": "HowToSupply",
+              name: `One sheet of ${plane.paperSize} paper`,
+            },
+          ],
+          step: plane.steps.map((step, index) => ({
+            "@type": "HowToStep",
+            position: index + 1,
+            name: step.title,
+            text: step.instruction,
+          })),
+        }}
+      />
       <Breadcrumbs
         items={[
           { name: "Home", href: "/" },
@@ -66,7 +90,7 @@ export default async function PlaneDetailPage({
             Folding guide
           </p>
           <h1 className="mt-2 font-display text-4xl font-semibold sm:text-5xl">
-            {plane.name}
+            How to Fold the {plane.name} Paper Airplane
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-[var(--muted)]">
             {plane.longDescription}

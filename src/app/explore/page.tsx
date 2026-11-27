@@ -12,6 +12,7 @@ export const metadata: Metadata = createMetadata({
   description:
     "Explore paper airplane categories, popular designs, folding guides, challenges, and flight science from Paper Airplane Lab.",
   path: "/explore",
+  robots: { index: false, follow: true },
 });
 
 export default function ExplorePage() {
